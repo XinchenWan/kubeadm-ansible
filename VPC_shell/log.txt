@@ -1,0 +1,64 @@
+
+Validating environment...
+Checking if gcloud exists...
+Checking completed. Successfully installed gcloud.
+
+Authorising Google Cloud Platform...
+[compute]
+region = asia-east1
+zone = asia-east1-a
+[core]
+account = ownertest@studious-rhythm-197504.iam.gserviceaccount.com
+disable_usage_reporting = False
+project = studious-rhythm-197504
+Successfully activated Service Account
+
+Preparing for creating a GCP Cluster
+
+Building GCP Cluster...
+
+Creating custom VPC network...
+NAME                     SUBNET_MODE  BGP_ROUTING_MODE  IPV4_RANGE  GATEWAY_IPV4
+kubernetes-the-hard-way  CUSTOM       REGIONAL
+Successfully create custom VPC network
+
+Creating VPC Subnet...
+NAME        REGION      NETWORK                  RANGE
+kubernetes  asia-east1  kubernetes-the-hard-way  10.240.0.0/24
+Successfully create Subnet
+
+Creating firewall rules...
+NAME                                    NETWORK                  DIRECTION  PRIORITY  ALLOW         DENY
+kubernetes-the-hard-way-allow-internal  kubernetes-the-hard-way  INGRESS    1000      tcp,udp,icmp
+NAME                                    NETWORK                  DIRECTION  PRIORITY  ALLOW                 DENY
+kubernetes-the-hard-way-allow-external  kubernetes-the-hard-way  INGRESS    1000      tcp:22,tcp:6443,icmp
+Successfully created firewall rules
+
+Firewall rules list:
+NAME                                    NETWORK                  DIRECTION  PRIORITY  ALLOW                 DENY
+kubernetes-the-hard-way-allow-external  kubernetes-the-hard-way  INGRESS    1000      tcp:22,tcp:6443,icmp
+kubernetes-the-hard-way-allow-internal  kubernetes-the-hard-way  INGRESS    1000      tcp,udp,icmp
+
+Creating public ip...
+Successfully created public ip
+
+Public ip lists:
+NAME                     REGION      ADDRESS        STATUS
+kubernetes-the-hard-way  asia-east1  35.229.221.60  RESERVED
+
+Creating controller-instances...
+10.240.0.2
+Successfully created controller-instances
+Successfully created worker-gpu-instances
+10.240.0.129
+10.240.0.129
+10.240.0.129,10.240.0.130
+10.240.0.129,10.240.0.130
+Successfully created worker-cpu-instances
+List instances:
+NAME          ZONE          MACHINE_TYPE   PREEMPTIBLE  INTERNAL_IP   EXTERNAL_IP      STATUS
+controller-0  asia-east1-a  n1-standard-1               10.240.0.2    35.229.224.86    RUNNING
+gpu-0         asia-east1-a  n1-standard-1               10.140.0.2                     TERMINATED
+worker-cpu-0  asia-east1-a  n1-standard-1               10.240.0.129  104.199.182.197  RUNNING
+worker-cpu-1  asia-east1-a  n1-standard-1               10.240.0.130  35.201.209.111   STAGING
+Successfully create GCP Cluster
